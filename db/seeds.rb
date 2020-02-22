@@ -26,7 +26,7 @@ charmander.photos.attach(io: charmander_photo, filename: 'charmander.png', conte
 charmander.save!
 
 
-squirtle = Pokemon.new(name: "squirtle", description: "Squirtle's shell is not merely used for protection. The shell's rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pokémon to swim at high speeds.", price: 80, pokemon_type: "water", address: "41 Stewart St, Melbourne", user: nico)
+squirtle = Pokemon.new(name: "Squirtle", description: "Squirtle's shell is not merely used for protection. The shell's rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pokémon to swim at high speeds.", price: 80, pokemon_type: "water", address: "41 Stewart St, Melbourne", user: nico)
 
 squirtle_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png')
 squirtle.photos.attach(io: squirtle_photo, filename: 'squirtle.png', content_type: 'image/png')
