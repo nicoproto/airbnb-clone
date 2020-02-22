@@ -1,0 +1,11 @@
+<div class="col-8">
+  <%= simple_form_for(pokemon) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description, as: :text%>
+    <%= f.input :address %>
+    <%= f.input :pokemon_type%>
+    <%= f.input :price%>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.button :submit, class: "btn-block" %>
+  <% end %>
+</div>

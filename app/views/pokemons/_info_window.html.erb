@@ -1,0 +1,6 @@
+<div>
+  <h2><%= pokemon.name %></h2>
+  <p><%= pokemon.address %></p>
+  <p><%= pokemon.pokemon_type %></p>
+  <%= cl_image_tag pokemon.photos.first.key, class: "w-50" %>
+</div>

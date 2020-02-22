@@ -1,2 +1,10 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Welcome to Poke A Mon</h1>
+<h2>Find something mate</h2>
+<%= form_tag pokemons_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a pokemon"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
