@@ -11,7 +11,12 @@ $wizard: #4FACFF;
   box-sizing: border-box;
 }
 
-
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 .slide-container {
   display: flex;
@@ -19,25 +24,29 @@ $wizard: #4FACFF;
 }
 
 .wrapper {
-  padding: 40px;
+  padding: 5px;
 
   &:focus {
     outline: 0;
   }
 }
 
-
-
 .clash-card {
   background: white;
-  width: 300px;
+  width: 95%;
   display: inline-block;
   margin: auto;
   border-radius: $border-radius-size + 5;
   position: relative;
   text-align: center;
   box-shadow: -1px 15px 30px -12px black;
-  z-index: 9999;
+  z-index: 500;
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 16px 15px 30px -12px;
+  }
 }
 
 .clash-card__image {
@@ -51,10 +60,15 @@ $wizard: #4FACFF;
 .clash-card__image--barbarian {
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg');
   img {
-    width: 300px;
+    width: 110%;
     position: absolute;
     top: -18%;
     left: 0%;
+    transition: all 0.5s ease;
+
+    &:hover {
+      transform: translate(0px, -5px);
+    }
   }
 }
 
@@ -95,6 +109,12 @@ $wizard: #4FACFF;
 .clash-card__unit-description {
   padding: 20px;
   margin-bottom: 10px;
+  font-size: 14px;
+  color: black;
+
+  &:hover {
+    color: black;
+  }
 }
 
 .clash-card__unit-stats--barbarian {
@@ -153,6 +173,7 @@ $wizard: #4FACFF;
   sup {
     position: absolute;
     bottom: 4px;
+    right: -10px;
     font-size: 45%;
     margin-left: 2px;
   }

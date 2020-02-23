@@ -1,51 +1,52 @@
 <h1>Available Pokemons</h1>
 
-  <div class="d-flex">
-    <div class="slide-container row col-8">
+  <div class="d-flex position-relative">
+    <div class="slide-container row col-8 pt-5">
       <% @pokemons.each do |pokemon| %>
-        <div class="wrapper">
-          <div class="clash-card barbarian">
-            <div class="clash-card__image clash-card__image--barbarian">
-              <%= cl_image_tag pokemon.photos.first.key %>
-            </div>
-            <div class="clash-card__level clash-card__level--barbarian"><%= pokemon.pokemon_type %></div>
-            <div class="clash-card__unit-name"><%= pokemon.name %></div>
-            <div class="clash-card__unit-description">
-              <%= pokemon.description %>
-            </div>
-
-            <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
-              <div class="one-third">
-                <%= link_to edit_pokemon_path(pokemon) do %>
-                  <img class="w-100" src="https://img.icons8.com/cotton/2x/edit.png">
-                <% end %>
+        <%= link_to pokemon_path(pokemon) do %>
+          <div class="wrapper col-4 mt-4">
+            <div class="clash-card barbarian">
+              <div class="clash-card__image clash-card__image--barbarian">
+                <%= cl_image_tag pokemon.photos.first.key %>
+              </div>
+              <div class="clash-card__level clash-card__level--barbarian"><%= pokemon.pokemon_type %></div>
+              <div class="clash-card__unit-name"><%= pokemon.name %></div>
+              <div class="clash-card__unit-description">
+                <%= pokemon.description %>
               </div>
 
-              <div class="one-third">
-                <%= link_to pokemon_path(pokemon), method: :delete, data: {confirm: "Are you sure you want to delete #{pokemon.name}?"} do %>
-                  <img class="w-100" src="https://img.icons8.com/cotton/2x/delete-sign.png">
-                <% end %>
+              <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
+                <div class="one-third">
+                  <%= link_to edit_pokemon_path(pokemon) do %>
+                    <img class="w-100" src="https://img.icons8.com/cotton/2x/edit.png">
+                  <% end %>
+                </div>
+
+                <div class="one-third">
+                  <%= link_to pokemon_path(pokemon), method: :delete, data: {confirm: "Are you sure you want to delete #{pokemon.name}?"} do %>
+                    <img class="w-100" src="https://img.icons8.com/cotton/2x/delete-sign.png">
+                  <% end %>
+                </div>
+
+                <div class="one-third no-border">
+                  <div class="stat"><%= pokemon.price.to_i %><sup>AUS</sup></div>
+                  <div class="stat-value">price</div>
+                </div>
+
               </div>
 
-              <div class="one-third no-border">
-                <div class="stat"><%= pokemon.price.to_i %><sup>AUS</sup></div>
-                <div class="stat-value">price</div>
-              </div>
+            </div> <!-- end clash-card barbarian-->
 
-            </div>
-
-          </div> <!-- end clash-card barbarian-->
-
-        </div> <!-- end wrapper -->
-
+          </div> <!-- end wrapper -->
+        <% end %>
       <% end %>
     </div> <!-- end container -->
 
     <div
       id="map"
-      class="col-4"
-      style="width: 100%;
-      height: 600px;"
+      class=""
+      style="width: 35%;
+      height: 100vh;"
       data-markers="<%= @markers.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
