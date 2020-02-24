@@ -11,7 +11,7 @@ class Pokemon < ApplicationRecord
   validates :name, presence: true
   validates :description, length: { in: 50..500 }
   validates :price, presence: true
-  validates :pokemon_type, inclusion: { in: %w[electric fire water grass] }
+  validates :pokemon_type, inclusion: { in: %w[electric fire water grass flying poison bug normal ground] }
   validates :address, presence: true
 
   include PgSearch::Model

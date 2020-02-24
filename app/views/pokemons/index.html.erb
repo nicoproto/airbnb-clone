@@ -9,7 +9,7 @@
                 <%= cl_image_tag pokemon.photos.first.key %>
               </div>
               <div class="clash-card__level clash-card__level--barbarian"><%= pokemon.pokemon_type %></div>
-              <div class="clash-card__unit-name"><%= pokemon.name %></div>
+              <div class="clash-card__unit-name"><%= pokemon.name.capitalize %></div>
               <div class="clash-card__unit-description">
                 <%= pokemon.description %>
               </div>

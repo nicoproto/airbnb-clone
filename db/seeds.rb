@@ -1,4 +1,8 @@
 require "open-uri"
+require 'json'
+require 'pry'
+require 'nokogiri'
+
 
 def line
   puts "-------------------------------------"
@@ -22,77 +26,59 @@ Pokemon.destroy_all
 puts "Creating new pokemons..."
 line
 
-pikachu = Pokemon.new(name: "Pikachu", description: "Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.", price: 120, pokemon_type: "electric", address: "47 Claremont St, South Yarra", user: nico)
 
-pikachu_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png')
-pikachu.photos.attach(io: pikachu_photo, filename: 'pikachu.png', content_type: 'image/png')
-pikachu.save!
+pokemons = ["pikachu", "raichu", "charmander", "charmeleon", "charizard", "squirtle", "wartortle", "blastoise", "bulbasaur", "ivysaur", "venusaur", "caterpie", "metapod", "butterfree", "weedle", "kakuna", "beedrill", "pidgey", "pidgeotto", "pidgeot", "rattata", "raticate", "spearow", "fearow", "ekans", "arbok", "sandshrew", "sandslash"]
 
-puts "#{pikachu.name} created!"
-line
+pokemons.each do |pokemon|
+  url = "https://pokeapi.co/api/v2/pokemon/#{pokemon}"
+  pokemon_serialized = open(url).read
+  pokemon = JSON.parse(pokemon_serialized)
 
-raichu = Pokemon.new(name: "Raichu", description: "WIf the electrical sacs become excessively charged, Raichu plants its tail in the ground and discharges. Scorched patches of ground will be found near this Pokémon's nest.", price: 150, pokemon_type: "electric", address: "7/478 Chapel St, South Yarra VIC 3141", user: sy)
+  puts "Creating #{pokemon["species"]["name"].capitalize} "
 
-raichu_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/026.png')
-raichu.photos.attach(io: raichu_photo, filename: 'raichu.png', content_type: 'image/png')
-raichu.save!
+  puts "- Type:#{pokemon['types'][0]['type']['name']}"
 
-puts "#{raichu.name} created!"
-line
 
-charmander = Pokemon.new(name: "Charmander", description: "The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself. If the Pokémon becomes enraged, the flame burns fiercely.", price: 100, pokemon_type: "fire", address: "106 Bridge Road, Richmond VIC", user: nico)
+  url = "https://www.pokemon.com/us/pokedex/#{pokemon["species"]["name"]}"
 
-charmander_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png')
-charmander.photos.attach(io: charmander_photo, filename: 'charmander.png', content_type: 'image/png')
-charmander.save!
+  html_file = open(url).read
+  html_doc = Nokogiri::HTML(html_file)
 
-puts "#{charmander.name} created!"
-line
+  pokemon_description = html_doc.search('.version-y.active')[0].text.strip
 
-charmeleon = Pokemon.new(name: "Charmeleon", description: "Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe, it turns aggressive. In this excited state, the flame at the tip of its tail flares with a bluish white color.", price: 150, pokemon_type: "fire", address: "248 Swan St, Richmond VIC 3121", user: sy)
+  puts "- Description:#{pokemon_description}"
 
-charmeleon_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png')
-charmeleon.photos.attach(io: charmeleon_photo, filename: 'charmeleon.png', content_type: 'image/png')
-charmeleon.save!
+  lat = "-37.#{rand(704195..873421)}".to_f
+  lng = "144.#{rand(857267..999999)}".to_f
+  pokemon_address = Geocoder.search([lat, lng]).first.address
 
-puts "#{charmeleon.name} created!"
-line
+  puts "- Address:#{pokemon_address}"
 
-charizard = Pokemon.new(name: "Charizard", description: "Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However, it never turns its fiery breath on any opponent weaker than itself.", price: 200, pokemon_type: "fire", address: "163 Commercial Rd, South Yarra VIC 3141", user: nico)
+  new_pokemon = Pokemon.new(
+    name: pokemon["species"]["name"],
+    description: pokemon_description,
+    price: rand(45..250),
+    pokemon_type: pokemon["types"][0]["type"]["name"],
+    address: pokemon_address,
+    user: User.all.sample)
+  if pokemon["id"].to_i < 100
+    if pokemon["id"].to_i < 10
+      pokemon_id = "00#{pokemon["id"]}"
+    else
+      pokemon_id = "0#{pokemon["id"]}"
+    end
+  else
+    pokemon_id = pokemon["id"]
+  end
 
-charizard_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png')
-charizard.photos.attach(io: charizard_photo, filename: 'charizard.png', content_type: 'image/png')
-charizard.save!
+  pokemon_photo_url = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/#{pokemon_id}.png"
+  pokemon_photo = URI.open(pokemon_photo_url)
+  new_pokemon.photos.attach(io: pokemon_photo, filename: "#{pokemon["species"]["name"]}.png", content_type: 'image/png')
 
-puts "#{charizard.name} created!"
-line
-
-squirtle = Pokemon.new(name: "Squirtle", description: "Squirtle's shell is not merely used for protection. The shell's rounded shape and the grooves on its surface help minimize resistance in water, enabling this Pokémon to swim at high speeds.", price: 80, pokemon_type: "water", address: "Albert Park VIC 3206", user: sy)
-
-squirtle_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png')
-squirtle.photos.attach(io: squirtle_photo, filename: 'squirtle.png', content_type: 'image/png')
-squirtle.save!
-
-puts "#{squirtle.name} created!"
-line
-
-wartortle = Pokemon.new(name: "Wartortle", description: "Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in color as Wartortle ages. The scratches on its shell are evidence of this Pokémon's toughness as a battler.", price: 120, pokemon_type: "water", address: "175B Beaconsfield Parade, Middle Park VIC 3206", user: nico)
-
-wartortle_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png')
-wartortle.photos.attach(io: wartortle_photo, filename: 'wartortle.png', content_type: 'image/png')
-wartortle.save!
-
-puts "#{wartortle.name} created!"
-line
-
-blastoise = Pokemon.new(name: "Blastoise", description: "Blastoise has water spouts that protrude from its shell. The water spouts are very accurate. They can shoot bullets of water with enough accuracy to strike empty cans from a distance of over 160 feet.", price: 180, pokemon_type: "water", address: "Pier Rd, St Kilda VIC 3182", user: sy)
-
-blastoise_photo = URI.open('https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png')
-blastoise.photos.attach(io: blastoise_photo, filename: 'blastoise.png', content_type: 'image/png')
-blastoise.save!
-
-puts "#{blastoise.name} created!"
-line
+  puts "#{new_pokemon.name.capitalize} created!" if new_pokemon.save!
+  line
+  sleep(5)
+end
 
 puts "#{Pokemon.all.count} pokemons created"
 
