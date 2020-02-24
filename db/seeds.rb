@@ -1,6 +1,5 @@
 require "open-uri"
 require 'json'
-require 'pry'
 require 'nokogiri'
 
 
@@ -13,8 +12,10 @@ puts "Destroying users..."
 User.destroy_all
 
 puts "Creating new users..."
-nico = User.create(email: "nico@gmail.com", password: "123456")
-sy = User.create(email: "sy@gmail.com", password: "123456")
+nico = User.create(email: "nico@pokemon.com", password: "123456")
+sy = User.create(email: "sy@pokemon.com", password: "123456")
+ash = User.create(email: "ash@pokemon.com", password: "123456")
+gary = User.create(email: "gary@pokemon.com", password: "123456")
 
 puts "#{User.all.count} users created"
 line
