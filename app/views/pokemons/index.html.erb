@@ -1,7 +1,6 @@
-<h1>Available Pokemons</h1>
-
-  <div class="d-flex position-relative">
-    <div class="slide-container row col-8 pt-5">
+<div class="d-flex position-relative index-background">
+    <h1 class="index-title">Available Pokemons</h1>
+    <div class="slide-container row col-8 pt-5 mt-5">
       <% @pokemons.each do |pokemon| %>
         <%= link_to pokemon_path(pokemon) do %>
           <div class="wrapper col-4 mt-4">

@@ -16,7 +16,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-family: 'Consolas', Arial;
+  font-family: 'Press Start 2P', ;
   font-size: 20px;
   color: white;
   border-radius: 0 0 0 15px;
@@ -104,40 +104,40 @@ input#datepicker {
 }
 .pokedex-button-shiny {
   position: absolute;
-  bottom: 75px;
-  left: 100px;
+  bottom: 74px;
+  left: 105px;
   width: 110px;
   height: 45px;
   border: none;
   background: #00ad5e;
   color: white;
-  font-family: 'Consolas', Arial;
-  font-size: 30px;
+  font-family: 'Press Start 2P', ;
+  font-size: 18px;
   cursor: pointer;
   outline: none;
 }
 .pokedex-button-zoom-in {
   position: absolute;
-  bottom: 137px;
+  bottom: 141px;
   right: 283px;
   width: 40px;
   background: transparent;
   border: none;
-  font-family: 'Consolas', Arial;
-  font-size: 20px;
+  font-family: 'Press Start 2P', ;
+  font-size: 12px;
   font-weight: bolder;
   outline: none;
   cursor: pointer;
 }
 .pokedex-button-zoom-out {
   position: absolute;
-  bottom: 139px;
-  right: 237px;
+  bottom: 141px;
+  right: 234px;
   width: 40px;
   background: transparent;
   border: none;
-  font-family: 'Consolas', Arial;
-  font-size: 19px;
+  font-family: 'Press Start 2P', ;
+  font-size: 12px;
   font-weight: bolder;
   outline: none;
   cursor: pointer;
@@ -151,7 +151,7 @@ input#datepicker {
   border: none;
   background: transparent;
   color: white;
-  font-family: 'Consolas', Arial;
+  font-family: 'Press Start 2P', ;
   font-size: 21px;
   font-weight: bolder;
   cursor: pointer;
@@ -163,7 +163,7 @@ input#datepicker {
   left: 95px;
   background: transparent;
   border: none;
-  font-family: 'Consolas', Arial;
+  font-family: 'Press Start 2P', ;
   font-weight: bolder;
   font-size: 27px;
   color: white;
@@ -193,12 +193,15 @@ input#datepicker {
 
 .pokedex-data-text {
   margin: 0;
+  font-family: 'Press Start 2P', ;
   color: white;
-  font-size: 15px;
+  font-size: 8px;
   max-height: 54px;
+  margin-top: 2px;
   overflow: scroll;
   &.description {
-    font-size: 12px;
+    font-size: 8px;
+    margin-top: 6px;
     width: 95%;
   }
 }

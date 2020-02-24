@@ -1,10 +1,17 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: rgb(124,208,254);
+  background: linear-gradient(180deg, rgba(124,208,254,1) 70%, rgba(255,255,255,0) 100%);
   position: fixed;
   width: 100%;
   z-index: 5000;
   top: 0;
+  font-family: 'Press Start 2P', ;
+  font-size: 14px;
+
+  .dropdown-item {
+    font-size: 14px;
+  }
 }
 
 .navbar-lewagon .navbar-collapse {

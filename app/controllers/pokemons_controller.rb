@@ -1,18 +1,16 @@
 class PokemonsController < ApplicationController
-  before_action :find_pokemon, only: [:edit, :update, :delete, :show]
+  before_action :authenticate_user!, except: :index
+  before_action :find_pokemon, only: %i[edit update delete show]
 
   def index
-    if params[:query].present?
-      sql_query = "name ILIKE :query OR pokemon_type ILIKE :query"
-      @pokemons = Pokemon.search_by_name_type_owner(params[:query]).geocoded
-    else
-      @pokemons = Pokemon.all.geocoded
-    end
+    @pokemons = Pokemon.all.geocoded
+
+    @pokemons = @pokemons.near(Geocoder.search(params[:location]).first.coordinates, 1) if params[:location].present?
+    @pokemons = Pokemon.search_by_name_type_owner(params[:query]).geocoded if params[:query].present?
 
     @markers = @pokemons.map do |pokemon|
       {
-        lat: pokemon.latitude,
-        lng: pokemon.longitude,
+        lat: pokemon.latitude, lng: pokemon.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { pokemon: pokemon }),
         image_url: "https://cdn4.iconfinder.com/data/icons/gaming-27/300/gaming-fun-entertainment-freetime-pokemon-512.png"
       }

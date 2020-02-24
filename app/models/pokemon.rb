@@ -16,11 +16,11 @@ class Pokemon < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_name_type_owner,
-    against: [:name, :pokemon_type],
-    associated_against: {
-      user: [:email]
-    },
-    using: {
-      tsearch: { prefix: true } # <-- now `superman batm` will return something!
-    }
+                  against: %i[name pokemon_type],
+                  associated_against: {
+                    user: [:email]
+                  },
+                  using: {
+                    tsearch: { prefix: true } # <-- now `superman batm` will return something!
+                  }
 end

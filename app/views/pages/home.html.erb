@@ -1,10 +1,28 @@
-<h1>Welcome to Poke A Mon</h1>
-<h2>Find something mate</h2>
-<%= form_tag pokemons_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a pokemon"
-  %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
+<div class="text-center">
+  <h1>Welcome to Poke A Mon</h1>
+  <h2>Find something mate</h2>
+</div>
+<div class="col-6 mt-5">
+  <%= form_tag pokemons_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a pokemon"
+    %>
+    <%= submit_tag "Search", class: "btn btn-primary m-3" %>
+  <% end %>
+
+  <%= form_tag pokemons_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "flex-grow-1 searchbar-input address_search",
+      placeholder: "Search your location or leave blank!",
+      name: 'location'%>
+    <%= submit_tag "Search", class: "btn btn-primary m-3" do %>
+        <i class="fas fa-search"></i>
+    <% end %>
+  <% end %>
+
+</div>
+
+
