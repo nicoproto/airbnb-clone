@@ -1,0 +1,7 @@
+<h1>Bookings show</h1>
+
+<h2><%= @booking.start_date  %></h2>
+<h2><%= @booking.end_date  %></h2>
+<h2><%= @booking.pokemon.name  %></h2>
+<h2><%= @booking.total_price  %></h2>
+<%= cl_image_tag @booking.pokemon.photos.first.key %>

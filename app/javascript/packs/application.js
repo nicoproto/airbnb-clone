@@ -11,10 +11,23 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 
-import "../plugins/flatpickr"
+// import "../plugins/flatpickr"
+import { toggleDateInputs } from '../plugins/flatpickr';
 
 import { previewImageOnFileSelect } from '../components/photo_preview';
+
+import { pokeballMoves } from '../components/pokeball_movement';
 
 initMapbox();
 initAutocomplete();
 previewImageOnFileSelect();
+
+
+toggleDateInputs();
+
+
+
+
+setInterval(function(){
+  pokeballMoves();
+}, 2000);

@@ -58,7 +58,6 @@ a {
 }
 
 .clash-card__image--barbarian {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg');
   img {
     width: 110%;
     position: absolute;
@@ -71,6 +70,54 @@ a {
     }
   }
 }
+
+.electric-bg {
+  background-color: #FCF7DE;
+}
+
+.fire-bg {
+  background-color: #FDDFDF;
+}
+
+.grass-bg {
+  background-color: #DEFDE0;
+}
+
+.water-bg {
+  background-color: #DEF3FD;
+}
+
+.ground-bg {
+  background-color: #f4e7da;
+}
+
+.poison-bg {
+  background-color: #98d7a5;
+}
+
+.bug-bg {
+  background-color: #f8d5a3;
+}
+
+.flying-bg {
+  background-color: #F5F5F5;
+}
+
+.normal-bg {
+  background-color: #F5F5F5;
+}
+
+  // rock: '#d5d5d4',
+  // fairy: '#fceaff',
+  // dragon: '#97b3e6',
+  // psychic: '#eaeda1',
+  // fighting: '#E6E0D4',
+
+
+
+
+
+
 
 .clash-card__level {
   text-transform: uppercase;

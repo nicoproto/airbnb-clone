@@ -3,7 +3,7 @@
     <%= f.input :name %>
     <%= f.input :description, as: :text%>
     <%= f.input :address %>
-    <%= f.input :pokemon_type%>
+    <%= f.input :pokemon_type, collection: Pokemon.poke_types.sort  %>
     <%= f.input :price%>
     <%= f.input :photos, as: :file, input_html: { multiple: true, class: "hidden photo-input" } %>
     <%= f.input :photos, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>

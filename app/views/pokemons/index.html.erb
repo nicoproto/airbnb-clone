@@ -5,7 +5,7 @@
         <%= link_to pokemon_path(pokemon) do %>
           <div class="wrapper col-4 mt-4">
             <div class="clash-card barbarian">
-              <div class="clash-card__image clash-card__image--barbarian">
+              <div class=' <%= "clash-card__image clash-card__image--barbarian #{pokemon.pokemon_type}-bg" %>'>
                 <%= cl_image_tag pokemon.photos.first.key %>
               </div>
               <div class="clash-card__level clash-card__level--barbarian"><%= pokemon.pokemon_type %></div>

@@ -4,10 +4,8 @@ class PokemonsController < ApplicationController
 
   def index
     @pokemons = Pokemon.all.geocoded
-
     @pokemons = @pokemons.near(Geocoder.search(params[:location]).first.coordinates, 1) if params[:location].present?
     @pokemons = Pokemon.search_by_name_type_owner(params[:query]).geocoded if params[:query].present?
-
     @markers = @pokemons.map do |pokemon|
       {
         lat: pokemon.latitude, lng: pokemon.longitude,

@@ -1,4 +1,12 @@
 class BookingsController < ApplicationController
+  def show
+    @booking = Booking.find(params[:id])
+  end
+
+  def index
+    @bookings = Booking.all.where(user: current_user)
+  end
+
   def create
     @pokemon = Pokemon.find(params[:pokemon_id])
 
@@ -8,7 +16,13 @@ class BookingsController < ApplicationController
     booking.user = current_user
     booking.total_price = (booking.end_date - booking.start_date) * @pokemon.price
 
-    booking.save ? (redirect_to booking_path(booking)) : (render :new)
+    if booking.save
+      redirect_to booking_path(booking)
+    else
+      @booking = Booking.new
+      render 'pokemons/show'
+    end
+
   end
 
   private
