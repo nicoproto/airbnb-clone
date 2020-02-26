@@ -28,8 +28,6 @@ const toggleDateInputs = function() {
       dateFormat: 'Y-m-d',
       disable: unvailableDates,
       onChange: function(selectedDates, selectedDate) {
-        console.log(selectedDate);
-        console.log(selectedDates);
         // if (selectedDate === '') {
         //   console.log("im in");
         //   endDateInput.disabled = true;

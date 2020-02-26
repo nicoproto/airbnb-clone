@@ -16,18 +16,7 @@ import { toggleDateInputs } from '../plugins/flatpickr';
 
 import { previewImageOnFileSelect } from '../components/photo_preview';
 
-import { pokeballMoves } from '../components/pokeball_movement';
-
 initMapbox();
 initAutocomplete();
 previewImageOnFileSelect();
-
-
 toggleDateInputs();
-
-
-
-
-setInterval(function(){
-  pokeballMoves();
-}, 2000);
