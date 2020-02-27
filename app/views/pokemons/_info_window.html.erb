@@ -1,6 +1,13 @@
-<div>
-  <h2><%= pokemon.name %></h2>
-  <p><%= pokemon.address %></p>
-  <p><%= pokemon.pokemon_type %></p>
-  <%= cl_image_tag pokemon.photos.first.key, class: "w-50" %>
-</div>
+ <%= link_to pokemon_path(pokemon) do %>
+  <div class="col-12">
+    <div class="clash-card barbarian mapbox-marker">
+      <div class=' <%= "clash-card__image mapbox-marker clash-card__image--barbarian #{pokemon.pokemon_type}-bg" %>'>
+        <%= cl_image_tag pokemon.photos.first.key %>
+      </div>
+      <div class="clash-card__unit-name mapbox-marker"><%= pokemon.name.capitalize %></div>
+      <div class="clash-card__level clash-card__level--barbarian">
+        <%= pokemon.pokemon_type %>
+      </div>
+    </div> <!-- end clash-card barbarian-->
+  </div> <!-- end wrapper -->
+<% end %>

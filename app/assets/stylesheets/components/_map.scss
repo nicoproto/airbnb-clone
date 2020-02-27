@@ -5,6 +5,8 @@
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 #map {
@@ -13,6 +15,35 @@
   right: 0;
   border: 5px dashed #0d0000;
 }
+
+.mapboxgl-popup-close-button {
+  right: 17% !important;
+  z-index: 9999 !important;
+  top: 6% !important;
+
+}
+
+.clash-card.barbarian.mapbox-marker {
+  min-width: 100px;
+}
+
+.clash-card__image.mapbox-marker {
+  height: 100px;
+  margin-bottom: 4px;
+}
+
+.clash-card__unit-name.mapbox-marker {
+  font-size: 18px !important;
+}
+
+ .clash-card__image.mapbox-marker {
+  img {
+    top: 0%;
+    width: 100%;
+  }
+ }
+
+
 
 // .marker.mapboxgl-marker.mapboxgl-marker-anchor-center {
 //   animation: all 0.5s ease;

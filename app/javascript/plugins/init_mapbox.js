@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 // --------------
 
-import { pokeballMoves } from '../components/pokeball_movement';
+import { pokeballMoves, pokeHover } from '../components/pokeball_movement';
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
@@ -48,10 +48,10 @@ const initMapbox = () => {
                                       mapboxgl: mapboxgl }));
     // --------------
 
-    setInterval(function(){
-      pokeballMoves();
-    }, 2000);
-
+    // Pokeball movement on markers
+    // setInterval(function(){ pokeballMoves() }, 2000);
+    pokeHover();
+    // --------------
   }
 };
 
