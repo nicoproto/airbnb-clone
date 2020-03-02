@@ -1,7 +1,6 @@
 require "open-uri"
 require 'json'
 require 'nokogiri'
-require 'pry'
 
 
 def line
