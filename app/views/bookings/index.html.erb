@@ -2,12 +2,12 @@
 <div class="booking-cards row col-10 pt-5 mt-5">
   <% @bookings.each do |booking| %>
     <%= link_to booking_path(booking) do %>
-      <div class="wrapper col-3 mt-4">
+      <div class="wrapper col-3 mt-4" data-booking-id='<%= booking.id %>'>
         <div class="clash-card barbarian">
           <div class=' <%= "clash-card__image clash-card__image--barbarian #{booking.pokemon.pokemon_type}-bg" %>'>
             <%= cl_image_tag booking.pokemon.photos.first.key %>
           </div>
-          <div class="clash-card__level clash-card__level--barbarian"><%= booking.status.capitalize %></div>
+          <div class="clash-card__level clash-card__level--barbarian"><%= booking.state.capitalize %></div>
           <div class="clash-card__unit-name"><%= booking.pokemon.name.capitalize %></div>
           <div class="clash-card__unit-description">
             <p>From: <%= booking.start_date %></p>
@@ -22,13 +22,13 @@
             </div>
 
             <div class="one-third">
-              <%= link_to booking_path(booking), method: :delete, data: {confirm: "Are you sure you want to delete your booking of #{booking.pokemon.name} from #{booking.start_date} to #{booking.end_date}?"} do %>
+              <%= link_to booking_path(booking), method: :delete, data: {confirm: "Are you sure you want to delete your booking of #{booking.pokemon.name} from #{booking.start_date} to #{booking.end_date}?"}, remote: true do %>
                 <img class="w-100" src="https://img.icons8.com/cotton/2x/delete-sign.png">
               <% end %>
             </div>
 
             <div class="one-third no-border">
-              <div class="stat"><%= booking.total_price.to_i %><sup>AUS</sup></div>
+              <div class="stat"><%= booking.amount.to_i %><sup>AUS</sup></div>
               <div class="stat-value">price</div>
             </div>
 

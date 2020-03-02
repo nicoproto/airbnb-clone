@@ -1,0 +1,17 @@
+function updateDom()  {
+  const cards = document.querySelector('.slide-container');
+
+  console.log('queryCurrentLocation: <%= params[:queryCurrentLocation] %>');
+  console.log('location: <%= params[:location] == "" %>');
+  console.log('query: <%= params[:query] == "" %>');
+  console.log('<%= @pokemons.length %>');
+
+  const html = '<%= j render "pokemons_partial", pokemons: @pokemons %>';
+  console.log(html);
+  cards.innerHTML = html;
+}
+
+updateDom();
+
+// Running this because if didn't load again after updating the DOM
+window.pokeHover();

@@ -52,6 +52,15 @@ const initMapbox = () => {
     // setInterval(function(){ pokeballMoves() }, 2000);
     pokeHover();
     // --------------
+
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+          trackUserLocation: true
+        })
+      );
   }
 };
 

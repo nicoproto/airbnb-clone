@@ -15,14 +15,16 @@
   <%= form_tag pokemons_path, method: :get do %>
     <%= text_field_tag :query,
       params[:query],
+      id: "location-form",
       class: "flex-grow-1 searchbar-input address_search",
       placeholder: "Search your location or leave blank!",
       name: 'location'%>
-    <%= submit_tag "Search", class: "btn btn-primary m-3" do %>
+
+      <%= hidden_field_tag :queryCurrentLocation, params[:queryCurrentLocation], id: "current_location" %>
+    <%= submit_tag "Search", class: "btn btn-primary m-3", id: "location-btn" do %>
         <i class="fas fa-search"></i>
     <% end %>
   <% end %>
-
 </div>
 
 

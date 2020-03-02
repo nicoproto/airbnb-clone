@@ -3,5 +3,6 @@
 <h2><%= @booking.start_date  %></h2>
 <h2><%= @booking.end_date  %></h2>
 <h2><%= @booking.pokemon.name  %></h2>
-<h2><%= @booking.total_price  %></h2>
+<h2><%= @booking.amount  %></h2>
+<h2><%= @booking.state  %></h2>
 <%= cl_image_tag @booking.pokemon.photos.first.key %>

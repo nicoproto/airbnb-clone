@@ -2,16 +2,17 @@ class Booking < ApplicationRecord
   before_save :check_overlaping
   belongs_to :pokemon
   belongs_to :user
+  monetize :amount_cents
 
   has_many :reviews, dependent: :destroy
 
-  validates :start_date, :end_date, presence: true, availability: true
+  validates :start_date, :end_date, presence: true #, availability: true
   validate :end_date_after_start_date
 
   # validates :start_date, presence: true
   # validates :end_date, presence: true
 
-  validates :status, inclusion: { in: %w[pending confirmed denied completed] }
+  validates :state, presence: true
 
   private
 

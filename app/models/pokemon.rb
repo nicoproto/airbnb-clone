@@ -10,6 +10,8 @@ class Pokemon < ApplicationRecord
   has_many :reviews, through: :bookings
   has_many_attached :photos
 
+  monetize :price_cents
+
   validates :name, presence: true
   validates :description, length: { in: 50..500 }
   validates :price, presence: true

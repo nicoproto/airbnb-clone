@@ -6,6 +6,13 @@ Rails.application.routes.draw do
     resources :bookings, only: %i[new create]
   end
 
-  resources :bookings, only: %i[show index edit]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :bookings, only: %i[show index edit destroy] do
+    resources :payments, only: :new
+  end
+
+  get '/filter', to: 'pokemons#filter'
+  get '/funpage', to: 'pokemons#funpage'
+
+  # Mount an external service that open your roots to code from Stripe-webhooks, it goes to Stripe's controller
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

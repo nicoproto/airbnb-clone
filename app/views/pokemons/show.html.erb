@@ -2,18 +2,15 @@
   <div class="pokedex">
     <div id="div_light" class="turnOnOff pokedex-light"></div>
     <div id="div_screen" style="background-image: url(<%=cl_image_path @pokemon.photos.first.key %>)" class='<%= "pokedex-screen #{@pokemon.pokemon_type}-bg" %>'></div>
-    <!-- <div id="div_loader" class="loader"></div> -->
     <div id="div_data" class="turnOnOff pokedex-data" data-unavailable="<%= @pokemon.unavailable_dates.to_json %>">
       <div class="d-flex justify-content-between">
         <p class="pokedex-data-text">Name: <%= @pokemon.name %></p>
         <p class="pokedex-data-text">Type: <%= @pokemon.pokemon_type.capitalize %></p>
       </div>
-      <!-- <p class="pokedex-data-text">Ability: <span id="text_ability"></span></p> -->
       <p class="pokedex-data-text description">Bio: <%= @pokemon.description %></p>
       <img class="description-arrow bounce"src="https://di-uploads-pod4.s3.amazonaws.com/mercedesbenzoffoothillranch/uploads/2016/08/arrow-down.png" alt="">
     </div>
     <img class="is-disabled turnOnOff pokedex-img" id="img" src="" alt="">
-    <!-- <button class="pokedex-button-on"></button> -->
 
     <%= simple_form_for [@pokemon, @booking] do |d| %>
       <%= d.error_notification %>
@@ -23,7 +20,6 @@
           class: "is-disabled turnOnOff pokedex-input",
           placeholder: "Start Date"
         } %>
-    <!-- <button id="btn_go" class="turnOnOff pokedex-button">Go</button> -->
     <%= d.input :end_date, html5: true, label: false,
         input_html: {
           id: "booking_end_date",
@@ -31,8 +27,7 @@
           placeholder: "End Date"
         } %>
 
-
-    <!-- <button id="btn_shiny" class="turnOnOff pokedex-button-shiny">Book</button> -->
+    <%= hidden_field_tag 'pokemon_id', @pokemon.id %>
     <%= d.submit 'Book!', class: "turnOnOff pokedex-button-shiny" %>
   <% end %>
 
@@ -52,24 +47,10 @@
         <td class="pokedex-table-cell"><div class="randomNumber"></div></td>
       </tr>
     </table>
-    <!-- <button id="btn_zoom-in" class=" turnOnOff pokedex-button-zoom-in">+</button> -->
     <p class="turnOnOff pokedex-button-zoom-in"><%= @pokemon.price.to_i %></p>
-
-    <!-- <button id="btn_zoom-out" class="is-disabled turnOnOff pokedex-button-zoom-out">-</button> -->
     <p class="turnOnOff pokedex-button-zoom-out">AUD</p>
-    <!-- <button id="btn_clear" class="pokedex-button-clear turnOnOff is-disabled">x</button> -->
-    <!-- <div id="div_tutorial" class="tutorial">
-      <div class="tutorial-bubble tutorial-clear">Press for clear data <span class="tutorial-arrow">&rarr;</span></div>
-      <div class="tutorial-bubble tutorial-bubble-blue tutorial-on">Turn on the Pokedex! <span class="tutorial-arrow">&rarr;</span></div>
-      <div class="tutorial-bubble tutorial-shiny">Get shiny mode! <span class="tutorial-arrow">&rarr;</span></div>
-      <div class="tutorial-bubble tutorial-random"><span class="tutorial-arrow">&larr;</span> Get random Pokemon!</div>
-      <div class="tutorial-bubble tutorial-input">Write a name of<br>a Pokemon or a<br>random number <span class="tutorial-arrow">&rarr;</span></div>
-      <div class="tutorial-bubble tutorial-zoom"><span class="tutorial-arrow">&larr;</span> Press for image zoom in and out</div>
-    </div> -->
   </div>
 </div>
 
 
 <!-- ------------------------------------------------------- -->
-
-<%= link_to "Back", @back_url %>

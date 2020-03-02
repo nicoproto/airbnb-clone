@@ -3,16 +3,8 @@ class PokemonsController < ApplicationController
   before_action :find_pokemon, only: %i[edit update delete show]
 
   def index
-    @pokemons = Pokemon.all.geocoded
-    @pokemons = @pokemons.near(Geocoder.search(params[:location]).first.coordinates, 1) if params[:location].present?
-    @pokemons = Pokemon.search_by_name_type_owner(params[:query]).geocoded if params[:query].present?
-    @markers = @pokemons.map do |pokemon|
-      {
-        lat: pokemon.latitude, lng: pokemon.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { pokemon: pokemon }),
-        image_url: "https://cdn4.iconfinder.com/data/icons/gaming-27/300/gaming-fun-entertainment-freetime-pokemon-512.png"
-      }
-    end
+    @pokemons = set_pokemons
+    @markers = create_markers(@pokemons)
   end
 
   def show
@@ -40,6 +32,23 @@ class PokemonsController < ApplicationController
     redirect_to root
   end
 
+  def filter
+    case params[:filteraction]
+    when 'price_asc' then @pokemons = set_pokemons.sort_by(&:price)
+    when 'price_desc' then @pokemons = set_pokemons.sort_by { |pokemon| - pokemon.price }
+    # when 'review_desc' then @pokemons = set_pokemons.order(avg_reviews: :desc)
+    # when 'review_asc' then @pokemons = set_pokemons.order(avg_reviews: :asc)
+    end
+
+    respond_to do |format|
+      format.js { render :filter }
+    end
+  end
+
+  def funpage
+
+  end
+
   private
 
   def pokemon_strong_params
@@ -48,5 +57,32 @@ class PokemonsController < ApplicationController
 
   def find_pokemon
     @pokemon = Pokemon.find(params[:id])
+  end
+
+  def create_markers(pokemons)
+    @markers = pokemons.map do |pokemon|
+      {
+        lat: pokemon.latitude, lng: pokemon.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { pokemon: pokemon }),
+        image_url: "https://cdn4.iconfinder.com/data/icons/gaming-27/300/gaming-fun-entertainment-freetime-pokemon-512.png"
+      }
+    end
+  end
+
+  def set_pokemons
+    @pokemons = Pokemon.geocoded
+
+    if (params[:queryCurrentLocation].present? && params[:queryCurrentLocation] != "")
+      coordinates = params[:queryCurrentLocation].split(",").map(&:to_f)
+      @pokemons = @pokemons.near(coordinates, 5)
+    elsif (params[:location].present? && params[:location] != "")
+      @pokemons = @pokemons.near(Geocoder.search(params[:location]).first.coordinates, 5)
+    end
+
+    if (params[:query].present? && params[:query] != "")
+      @pokemons = @pokemons.search_by_name_type_owner(params[:query])
+    end
+
+    return @pokemons
   end
 end
