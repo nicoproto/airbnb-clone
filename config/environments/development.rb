@@ -63,7 +63,7 @@ Rails.application.configure do
 
 
   # Allowing ngrok to test strips
-  config.hosts << "ac456652.ngrok.io"
+  config.hosts << "9bdae81c.ngrok.io"
 
 
 end
