@@ -2,7 +2,7 @@
   "name": "airbnb_clone",
   "private": true,
   "dependencies": {
-    "@mapbox/mapbox-gl-geocoder": "^4.5.1",
+    "@mapbox/mapbox-gl-geocoder": "^4.7.4",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
